@@ -1,27 +1,36 @@
 
-import myAxios from './axiosConfiguration';
+import axios from 'axios';
 
+axios.defaults.baseURL="http://localhost:5220"
 export default {
   getTasks: async () => {
-    const result = await myAxios.get(`/tasks`)
-    if (result == undefined || result.data == undefined)
-      return [];
-    else
-      return result.data;
+    const result = await axios.get(`/items`);
+    console.log(result, "get all");
+
+    return result.data;
   },
 
   addTask: async (name) => {
-    const result = await myAxios.post(`/tasks`, { Id: 0, Name: name, IsCompelte: false })
-    return {};
+    console.log('addTask', name);
+    const result = await axios.post(`/items`, { id: 0, name: name, isComplete: false });
+    console.log(result, "add");
+
+    return result.data;
   },
 
-  setCompleted: async (id, isComplete) => {
-    const result = await myAxios.put(`/tasks/${id}`, { Id: id, Name: "", IsCompelte: isComplete });
+  setCompleted: async (id) => {
+    console.log('setCompleted', { id });
+    const result = await axios.put(`/items/${id}`);
+    console.log(result, "update");
     return {};
   },
 
   deleteTask: async (id) => {
-    const result = myAxios.delete(`/tasks/${id}`);
-    return {};
+    console.log('deleteTask');
+    const result = await axios.delete(`/items/${id}`);
+    console.log(result, "delete");
+
+    return result.data;
   }
+
 };
