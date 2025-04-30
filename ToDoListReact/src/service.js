@@ -1,7 +1,18 @@
 
 import axios from 'axios';
 
-axios.defaults.baseURL="http://localhost:5220"
+// axios.defaults.baseURL="http://localhost:5220"
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+console.log(process.env.REACT_APP_API_URL)
+
+axios.interceptors.response.use(
+  response => response, 
+  error => {
+    console.error('Axios Error:', error.response ? error.response.data : error.message);
+    //return Promise.reject(error); // דחוף את השגיאה כדי שתוכל לטפל בה במקום אחר
+  }
+);
+
 export default {
   getTasks: async () => {
     const result = await axios.get(`/items`);
