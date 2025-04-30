@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add CORS services
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins, builder =>
+    options.AddPolicy(MyAllowSpecificOrigins, builder =>
     {
         builder.AllowAnyOrigin()
                .AllowAnyMethod()
