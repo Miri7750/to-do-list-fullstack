@@ -42,7 +42,7 @@ app.UseCors(MyAllowSpecificOrigins);
     });
 
 
-app.MapGet("/item", async (ToDoDbContext db)=>{
+app.MapGet("/items", async (ToDoDbContext db)=>{
     try{
         var items=await db.Items.ToListAsync();
         return Results.Ok(items);
@@ -51,7 +51,7 @@ app.MapGet("/item", async (ToDoDbContext db)=>{
         return Results.Problem("An error occurred while retrieving items: " + ex.Message);
     }
 });
-app.MapGet("/item/{id}", async (ToDoDbContext db, int id) => { 
+app.MapGet("/items/{id}", async (ToDoDbContext db, int id) => { 
     try{
     var eItem=await db.Items.FindAsync(id);
     if(eItem ==null )
@@ -75,7 +75,7 @@ app.MapGet("/item/{id}", async (ToDoDbContext db, int id) => {
     }
 });
 
-app.MapPut("/item/{id}", async (ToDoDbContext db,int id,[FromBody]Item item)=>{
+app.MapPut("/items/{id}", async (ToDoDbContext db,int id,[FromBody]Item item)=>{
    try{
 
    
@@ -92,7 +92,7 @@ app.MapPut("/item/{id}", async (ToDoDbContext db,int id,[FromBody]Item item)=>{
      }
 
 });
-app.MapDelete("/item/{id}", async(ToDoDbContext db,int id) =>{
+app.MapDelete("/items/{id}", async(ToDoDbContext db,int id) =>{
     try{
     if(id<=0)
     return Results.BadRequest("Id must be greater than 0");
