@@ -31,11 +31,11 @@ export default {
     return result.data;
   },
 
-  setCompleted: async (id, isComplete) => {
-    console.log('setCompleted', { id, isComplete });
+  setCompleted: async (id, newIsComplete) => {
+    console.log('setCompleted', { id, isComplete: newIsComplete });
     const {data} = await axios.get(`/items/${id}`);
     console.log(data, "get task to update");
-    const result = await axios.put(`/items/${id}`, { id: id, name: data.name, isCompelte: isComplete });
+    const result = await axios.put(`/items/${id}`, { id: id, name: data.name, isCompelte: newIsComplete });
     console.log(result, "update");
     return result.data;
   },
