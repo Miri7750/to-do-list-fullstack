@@ -33,9 +33,9 @@ export default {
 
   setCompleted: async (id, isComplete) => {
     console.log('setCompleted', { id, isComplete });
-    const task = await axios.get(`/items/${id}`);
-    console.log(task, "get task to update");
-    const result = await axios.put(`/items/${id}`, { id: id, name: task.name, isCompelte: isComplete });
+    const {data} = await axios.get(`/items/${id}`);
+    console.log(data, "get task to update");
+    const result = await axios.put(`/items/${id}`, { id: id, name: data.name, isCompelte: isComplete });
     console.log(result, "update");
     return result.data;
   },
