@@ -75,20 +75,6 @@ app.MapGet("/item/{id}", async (ToDoDbContext db, int id) => {
     }
 });
 
-app.MapPost("/items", async (ToDoDbContext db, Item item) =>
-{
-    try{
-
-    if (item == null)
-        return Results.BadRequest("Item cannot be null");
-    db.Items.Add(item);  
-    await db.SaveChangesAsync();    
-    return Results.Created($"/items/{item.Id}", item);
-    }
-    catch(Exception ex){
-        return Results.Problem("An error occurred while creating item: " + ex.Message);
-    }
-});
 app.MapPut("/item/{id}", async (ToDoDbContext db,int id,[FromBody]Item item)=>{
    try{
 
