@@ -33,7 +33,7 @@ export default {
     console.log('setCompleted', { id });
     const result = await axios.put(`/items/${id}`);
     console.log(result, "update");
-    return {};
+    return result.data;
   },
 
   deleteTask: async (id) => {
