@@ -33,8 +33,8 @@ export default {
 
   setCompleted: async (id, isComplete) => {
     console.log('setCompleted', { id, isComplete });
-    const task = await axios.get(`/tasks/${id}`);
-    const result = await axios.put(`/tasks/${id}`, { Id: id, Name: task.Name, IsCompelte: isComplete });
+    const task = await axios.get(`/items/${id}`);
+    const result = await axios.put(`/items/${id}`, { Id: id, Name: task.Name, IsCompelte: isComplete });
     return result.data;
   },
   deleteTask: async (id) => {
