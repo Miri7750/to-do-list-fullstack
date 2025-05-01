@@ -35,7 +35,7 @@ export default {
     console.log('setCompleted', { id, isComplete: isComplete });
     const {data} = await axios.get(`/items/${id}`);
     console.log(data, "get task to update");
-    const newTask= { id: id, name: data.name, isCompelete: isComplete }
+    const newTask= { id: id, name: data.name, isComplete: isComplete }
     console.log(newTask, "new task to update");
     const result = await axios.put(`/items/${id}`,newTask);
     console.log(result, "update");
