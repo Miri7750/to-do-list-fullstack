@@ -75,7 +75,7 @@ app.MapGet("/items/{id}", async (ToDoDbContext db, int id) => {
     }
 });
 
-app.MapPut("/items/{id}", async (ToDoDbContext db,int id,[FromBody]Item item)=>{
+app.MapPut("/items/{id}", async (ToDoDbContext db,int id,Item item)=>{
    try{
 
    
