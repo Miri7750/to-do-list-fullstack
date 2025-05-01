@@ -6,7 +6,7 @@ axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 console.log(process.env.REACT_APP_API_URL)
 
 axios.interceptors.response.use(
-  response => response, 
+  response => response,
   error => {
     console.error('Axios Error:', error.response ? error.response.data : error.message);
     //return Promise.reject(error); // דחוף את השגיאה כדי שתוכל לטפל בה במקום אחר
@@ -17,8 +17,10 @@ export default {
   getTasks: async () => {
     const result = await axios.get(`/items`);
     console.log(result, "get all");
-
-    return result.data;
+    if (result == undefined || result.data == undefined)
+      return [];
+    else
+      return result.data;
   },
 
   addTask: async (name) => {
@@ -29,13 +31,12 @@ export default {
     return result.data;
   },
 
-  setCompleted: async (id) => {
-    console.log('setCompleted', { id });
-    const result = await axios.put(`/items/${id}`);
-    console.log(result, "update");
+  setCompleted: async (id, isComplete) => {
+    console.log('setCompleted', { id, isComplete });
+    const task = await axios.get(`/tasks/${id}`);
+    const result = await axios.put(`/tasks/${id}`, { Id: id, Name: task.Name, IsCompelte: isComplete });
     return result.data;
   },
-
   deleteTask: async (id) => {
     console.log('deleteTask');
     const result = await axios.delete(`/items/${id}`);
